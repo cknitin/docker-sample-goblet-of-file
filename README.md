@@ -14,6 +14,7 @@ A Harry Potter-inspired full-stack application where users can submit their name
 - [☁️ Deploying to Azure Kubernetes Service (AKS)](#deploying-to-azure-kubernetes-service-aks)
 - [🌐 Service URLs](#service-urls)
 - [🧹 Troubleshooting](#troubleshooting)
+- [Docker Build and Push Instructions for All Services](#docker-build-and-push-instructions-for-all-services)
 
 ---
 
@@ -177,6 +178,76 @@ For custom domains or HTTPS, set up an Ingress controller (e.g., NGINX) and DNS 
 - Ensure all environment variables are set correctly. 📝
 - For AKS, make sure images are pushed to ACR and accessible. ☁️
 - Check firewall/networking rules if services are not reachable. 🛡️
+
+---
+
+## Docker Build and Push Instructions for All Services
+
+This section provides step-by-step instructions to build and push Docker images for each service to Docker Hub. Replace `iamcknitin` with your Docker Hub username if different.
+
+### Prerequisites
+- Docker installed and running
+- Docker Hub account (https://hub.docker.com/)
+- Logged in to Docker Hub (`docker login`)
+
+---
+
+### 1. Build and Push `goblet-frontend`
+
+```powershell
+cd frontend
+# Build the Docker image
+docker build -t iamcknitin/goblet-frontend:latest .
+# Push the image to Docker Hub
+docker push iamcknitin/goblet-frontend:latest
+cd ..
+```
+
+---
+
+### 2. Build and Push `goblet-api`
+
+```powershell
+cd api
+# Build the Docker image
+docker build -t iamcknitin/goblet-api:latest .
+# Push the image to Docker Hub
+docker push iamcknitin/goblet-api:latest
+cd ..
+```
+
+---
+
+### 3. Build and Push `goblet-admin`
+
+```powershell
+cd admin-app
+# Build the Docker image
+docker build -t iamcknitin/goblet-admin:latest .
+# Push the image to Docker Hub
+docker push iamcknitin/goblet-admin:latest
+cd ..
+```
+
+---
+
+### 4. Build and Push `goblet-worker`
+
+```powershell
+cd worker
+# Build the Docker image
+docker build -t iamcknitin/goblet-worker:latest .
+# Push the image to Docker Hub
+docker push iamcknitin/goblet-worker:latest
+cd ..
+```
+
+---
+
+**Note:**
+- Ensure you are in the project root directory before running these commands.
+- The `latest` tag is used for simplicity; you can use versioned tags as needed.
+- Update your Kubernetes deployment files to use these Docker Hub image URLs.
 
 ---
 
